@@ -1,0 +1,4 @@
+- Visit Glassdoor, search for any keyword and navigate to second page. Copy the url.
+- Remove "last number" and ".htm" from teh end of url
+- Create a file like [list](./list) which contains `;` separated `name of the city` and `url`
+- Run `Client.rb`. It will save all IDs and pages on hard drive. And then you can run `Analyze` to generate `JSON` files.
