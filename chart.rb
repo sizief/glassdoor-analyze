@@ -11,7 +11,7 @@ module Chart
       values << el[1].to_i
     end
 
-    g = Gruff::SideBar.new(1200)
+    g = Gruff::SideBar.new(800)
     city = args[:city]
     city = 'Newyork' if city == 'New_york'
     city = 'Bay area' if city == 'Bay_area'
