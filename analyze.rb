@@ -4,61 +4,93 @@ class Analyze
   require 'open-uri'
   require 'json'
   require 'fileutils'
+  require 'yaml'
+  require_relative 'logging'
+
+  include Logging
 
   def initialize(args)
     @city = args[:city]
-    @dictionary = create_dictionary
-    @logger = Logger.new(STDOUT)
-    @logger.level = Logger::INFO if args[:verbose]
-    # update_anagram './pages/berlin/3110045054'
-    # p $dictionary.sort_by{|k,v| v}.reverse
   end
 
   def run
-    analyze_all @city
-  end
-
-  def analyze_all(city)
-    Dir["./pages/#{city}/*"].each do |source|
-      p source
-      @logger.info "#{source} is empty".red unless update_anagram source # './pages/berlin/3065453364'
-    end
-    @dictionary.sort_by { |_k, v| v }.reverse
+    data = analyze_all @city
+    FileUtils.mkdir_p('result')
+    save_to_file data, @city
   end
 
   private
 
-  def create_dictionary
-    languages = %w[java javascript c c# c++ php python perl elixir go ruby nodejs scala shell sql erlang rust android kotlin]
-    technologies = %w[kafka nosql puppet salt aws docker kubernetes rabiitMQ elastic RESTful mongo terraform ansible chef amazon jenkins kibana git]
-    dic = {}
-    (languages + technologies).each do |keyword|
-      dic[keyword.downcase] = 0
-    end
-    dic
+  def save_to_file(data, city)
+    file = "./result/#{city}.yml"
+    # FileUtils.touch(file)
+    store = File.open(file, 'w')
+    store.puts data
+    store.close
   end
 
-  def update_anagram(source)
+  def analyze_all(city)
+    dictionary = create_dictionary
+    Dir["./pages/#{city}/*"].each do |source|
+      logger.info source
+      res = update_anagram source, dictionary
+      if res[:status]
+        dictionary = res[:message]
+      else
+        logger.info "#{source} is empty".red
+      end
+    end
+    dictionary.to_yaml
+  end
+
+  def create_dictionary
+    keyword_list = []
+    dictionary = {}
+
+    config = YAML.load_file('config.yml')
+    (config['category']).each do |category|
+      dictionary[category] = {}
+      (config[category]).each do |keyword|
+        dictionary[category][keyword.downcase] = 0
+      end
+    end
+    dictionary
+  end
+
+  def update_anagram(source, dictionary)
     open(source).gets
-    this_businues_dictionary = {}
+    business_dictionary = {}
     doc = Nokogiri::HTML(open(source))
     script = doc.css('script')[10]
-    # @logger.debug "Script for #{source}: #{script}"
-    return false if script.nil?
+    return { status: false } if script.nil?
 
     keywords = script.content.scan(/"description"\:(.*?)\}/m)
-    return if keywords.first.nil?
+    return { status: false } if keywords.first.nil?
 
     keywords = keywords.first.first.gsub(/\(|\)|\\|"|,/, '').split(' ')
-    keywords.each do |k|
-      keyword = k.downcase
-      next unless @dictionary.key?(keyword)
-
-      this_businues_dictionary[keyword] = this_businues_dictionary[keyword].nil? ? 1 : 2
-      next if this_businues_dictionary[keyword] > 1
-
-      @dictionary[keyword] += 1
-    end
+    { status: true, message: update_hash(dictionary, business_dictionary, keywords) }
   end
-  # p open("./ids/berlin-software_engineer").gets.split(",").size
+
+  def update_hash(dictionary, business_dictionary, keywords)
+    keywords.each do |keyword|
+      keyword = keyword[0..keyword.index('&') - 1] unless keyword.index('&').nil?
+      keyword.downcase!
+      category = find_category dictionary, keyword
+
+      next if category.nil?
+      next if business_dictionary.key?(keyword)
+
+      business_dictionary[keyword] = 1
+      dictionary[category][keyword] += 1
+    end
+    dictionary
+  end
+
+  def find_category(dictionary, keyword)
+    category = nil
+    dictionary.keys.each do |config_category|
+      category = config_category if dictionary[config_category].key?(keyword)
+    end
+    category
+  end
 end

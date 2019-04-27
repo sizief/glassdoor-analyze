@@ -1,0 +1,39 @@
+---
+languages:
+  java: 324
+  javascript: 196
+  c: 75
+  c#: 140
+  c++: 144
+  php: 59
+  python: 200
+  perl: 31
+  elixir: 5
+  golang: 34
+  ruby: 48
+  nodejs: 31
+  scala: 29
+  shell: 39
+  sql: 161
+  rust: 12
+  swift: 15
+  kotlin: 3
+technologies:
+  kafka: 41
+  nosql: 60
+  aws: 123
+  docker: 73
+  kubernetes: 39
+  rabbitmq: 13
+  elastic: 7
+  restful: 61
+  mongo: 10
+  terraform: 5
+  ansible: 9
+  chef: 12
+  gcp: 16
+  jenkins: 42
+  git: 85
+  react: 92
+  angular: 60
+  vue: 14

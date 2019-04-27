@@ -1,0 +1,61 @@
+urls:
+  - Dubai;https://www.glassdoor.ca/Job/dubai;jobs-SRCH_IL.0,5_IC2204498_KO6,14_IP
+  - Tallinn;https://www.glassdoor.ca/Job/tallinn;jobs-SRCH_IL.0,7_IC2775919_KO8,16_IP
+  - Istanbul;https://www.glassdoor.ca/Job/istanbul;jobs-SRCH_IL.0,8_IC3361434_KO9,26_IP
+  - Lisbon;https://www.glassdoor.ca/Job/lisbon;jobs-SRCH_IL.0,6_IC3192045_KO7,15_IP
+  - Dublin;https://www.glassdoor.ca/Job/dublin;jobs-SRCH_IL.0,6_IC2739035_KO7,15_IP
+  - New_york;https://www.glassdoor.ca/Job/new-york;jobs-SRCH_IL.0,8_IC1132348_KO9,17_IP
+  - Singapore;https://www.glassdoor.ca/Job/singapore;jobs-SRCH_IL.0,9_IC3235921_KO10,18_IP
+  - Amsterdam;https://www.glassdoor.ca/Job/amsterdam;jobs-SRCH_IL.0,9_IC3064478_KO10,18_IP
+  - Berlin;https://www.glassdoor.ca/Job/berlin;jobs-SRCH_IL.0,6_IC2622109_KO7,15_IP
+  - Toronto;https://www.glassdoor.ca/Job/toronto;jobs-SRCH_IL.0,7_IC2281069_KO8,16_IP
+  - Paris;https://www.glassdoor.ca/Job/paris;jobs-SRCH_IL.0,5_IC2881970_KO6,14_IP
+  - Vancouver;https://www.glassdoor.ca/Job/vancouver;jobs-SRCH_IL.0,9_IC2278756_KO10,18_IP
+  - London;https://www.glassdoor.ca/Job/london;jobs-SRCH_IL.0,6_IC2671300_KO7,15_IP
+  - Bay_area;https://www.glassdoor.ca/Job/san-jose;jobs-SRCH_IL.0,8_IC1147436_KO9,17_IP
+job_types:  
+  - software
+  - back-end
+  - front-end
+category:
+  - languages
+  - technologies
+languages:
+  - java
+  - javascript 
+  - c 
+  - c# 
+  - c++ 
+  - php
+  - python
+  - perl 
+  - elixir 
+  - golang 
+  - ruby
+  - nodejs 
+  - scala 
+  - shell 
+  - sql 
+  - rust 
+  - swift
+  - kotlin
+technologies:
+  - kafka
+  - nosql
+  - aws 
+  - docker 
+  - kubernetes 
+  - rabbitMQ 
+  - elastic 
+  - RESTful 
+  - mongo 
+  - terraform 
+  - ansible
+  - chef
+  - gcp
+  - jenkins 
+  - git 
+  - react 
+  - angular 
+  - vue
+ 
