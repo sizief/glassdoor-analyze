@@ -45,5 +45,5 @@ def analyze_all_cities
   end
 end
 
-analyze
-#analyze_all_cities
+#analyze
+analyze_all_cities
